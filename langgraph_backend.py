@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-llm = ChatGoogleGenerativeAI()
+llm = ChatGoogleGenerativeAI(model='gemini-2.5-flash')
 
 class ChatState(TypedDict):
     messages: Annotated[list[BaseMessage], add_messages]
@@ -27,3 +27,7 @@ graph.add_edge(START, "chat_node")
 graph.add_edge("chat_node", END)
 
 chatbot = graph.compile(checkpointer=checkpointer)
+
+#graph.stream can be used for streaming responses
+#stream returns generator object
+#Generates responses in a streaming fashion like how other llms do
